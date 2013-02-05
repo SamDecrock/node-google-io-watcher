@@ -4,10 +4,10 @@ node-google-io-watcher
 Node.js script to watch the #io13 feed for new messages
 
 ## What it does ##
-It monitors the #io13 hashtag on Google+ for new posts. I wrote it to be one of the first to get a ticket to Google I/O 2013. It uses the [Pushover service](https://pushover.net/) to send me push messages to my iPhone.
+It monitors the [#io13](https://plus.google.com/s/%23io13) hashtag on Google+ for new posts. I wrote it to be one of the first to get a ticket to Google I/O 2013. It uses the [Pushover service](https://pushover.net/) to send me push messages to my iPhone.
 
 ## Installation ##
-Get a the [Pushover app](https://pushover.net/), create an app and add a device. This should give you a ***token*** and a ***userkey***.
+Get the [Pushover app](https://pushover.net/), create an app and add a device. This should give you a ***token*** and a ***userkey***.
 
 Get a Google+ key at https://code.google.com/apis/console/b/1/. Don't forget to enable Google+ at ***Services tab***
 
