@@ -12,6 +12,7 @@ loop();
 function loop(){
 	getLatestPost(function (err, item){
 		if(!err && item.url != previousUrl){
+			console.log(item.title + ": " + item.url);
 			push.send(item.title, item.url);
 			previousUrl = item.url;
 		}else{
