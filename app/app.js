@@ -15,8 +15,10 @@ function loop(){
 			push.send(item.title, item.url);
 			previousUrl = item.url;
 		}else{
-			if(err)
-				console.log("Error: " + err);
+			if(err){
+				console.log("Error:");
+				console.log(err);
+			}
 		}
 
 		setTimeout(function(){
@@ -42,7 +44,11 @@ function getLatestPost(callback){
 
 			var data = JSON.parse(res.body);
 
+			if(data.error)
+				return callback(data.error);
+
 			callback(null, data.items[0]);
+
 		}
 	);
 }
