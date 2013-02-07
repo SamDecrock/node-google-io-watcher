@@ -11,7 +11,7 @@ loop();
 
 function loop(){
 	getLatestPost(function (err, item){
-		if(!err && item.url != previousUrl){
+		if(!err && item && item.url != previousUrl){
 			console.log(item.title + ": " + item.url);
 			push.send(item.title, item.url);
 			previousUrl = item.url;
@@ -48,7 +48,10 @@ function getLatestPost(callback){
 			if(data.error)
 				return callback(data.error);
 
-			callback(null, data.items[0]);
+			if(data.items && data.items.length)
+				callback(null, data.items[0]);
+			else
+				callback(null, null);
 
 		}
 	);
