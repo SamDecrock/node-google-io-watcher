@@ -1,24 +1,37 @@
 var config = require('./config');
 
 var httpreq = require('httpreq');
+var _ = require("underscore");
 var Pushover = require('./pushover');
 var push = new Pushover(config.pushover);
 
-var previousUrl = "";
+var previousUrls = {};
 
 
 loop();
 
 function loop(){
-	getLatestPost(function (err, item){
-		if(!err && item && item.url != previousUrl){
-			console.log(item.title + ": " + item.url);
-			push.send(item.title, item.url);
-			previousUrl = item.url;
-		}else{
-			if(err){
-				console.log("Error:");
-				console.log(err);
+	getLatestPost(function (err, items) {
+		if(err) {
+			console.log("Error: ", err);
+		} else {
+			if(_.isEmpty(previousUrls)) {
+
+				_.each(items, function (item) {
+					previousUrls[item.url] = true;
+					console.log("Does not send:", item.url);
+				});
+
+			} else {
+
+				_.each(items, function (item) {
+					if(!_.has(previousUrls, item.url)) {
+						console.log(item.title + ": " + item.url);
+						push.send(item.title, item.url);
+						previousUrls[item.url] = true;
+					}
+
+				});
 			}
 		}
 
@@ -35,7 +48,7 @@ function getLatestPost(callback){
 			parameters: {
 				query : "#io13",
 				orderBy: "recent", //best or recent
-				maxResults: 1, // max = 20
+				maxResults: 20, // max = 20
 				key: config.google.key
 			}
 		},
@@ -49,7 +62,7 @@ function getLatestPost(callback){
 				return callback(data.error);
 
 			if(data.items && data.items.length)
-				callback(null, data.items[0]);
+				callback(null, data.items);
 			else
 				callback(null, null);
 
