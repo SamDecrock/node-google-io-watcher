@@ -24,3 +24,7 @@ From the app/ folder.
 
 ## Where to run it ##
 Run it on a machine that's always on. I recommend [Digital Ocean](http://www.digitalocean.com). They offer clould servers for only $5/month.
+
+## Contributions ##
+Thanks to [Kristian Mide](https://github.com/fasmide) for fixing a logical error :-)
+
