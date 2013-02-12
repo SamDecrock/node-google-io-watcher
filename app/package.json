@@ -1,11 +1,12 @@
 {
   "name": "node-google-io-watcher",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
-    "httpreq": "~0.1.1",
-    "underscore": "~1.4.4"
+    "httpreq": "*",
+    "underscore": "~1.4.4",
+    "node-pushover": "*"
   }
 }

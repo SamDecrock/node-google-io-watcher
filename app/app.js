@@ -2,8 +2,9 @@ var config = require('./config');
 
 var httpreq = require('httpreq');
 var _ = require("underscore");
-var Pushover = require('./pushover');
+var Pushover = require('node-pushover');
 var push = new Pushover(config.pushover);
+var packagejson = require('./package.json');
 
 var previousUrls = {};
 
@@ -17,13 +18,19 @@ function loop(){
 		} else {
 			if(_.isEmpty(previousUrls)) {
 
+				// Mark all items as read items
 				_.each(items, function (item) {
 					previousUrls[item.url] = true;
-					console.log("Does not send:", item.url);
 				});
+
+				// send out a bootup message
+				var bootupMsg = "Google I/O Watcher started, v" + packagejson.version;
+				console.log(bootupMsg);
+				push.send("Googie I/O Watcher", bootupMsg);
 
 			} else {
 
+				// check for new posts:
 				_.each(items, function (item) {
 					if(!_.has(previousUrls, item.url)) {
 						console.log(item.title + ": " + item.url);
