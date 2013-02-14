@@ -7,6 +7,7 @@
   "dependencies": {
     "httpreq": "*",
     "underscore": "~1.4.4",
-    "node-pushover": "*"
+    "node-pushover": "*",
+    "twilio": "*"
   }
 }

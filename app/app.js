@@ -2,12 +2,39 @@ var config = require('./config');
 
 var httpreq = require('httpreq');
 var _ = require("underscore");
-var Pushover = require('node-pushover');
-var push = new Pushover(config.pushover);
 var packagejson = require('./package.json');
+
+var notifier;
+switch(config.notification_type) {
+    case 'pushover':
+    var Pushover = require('node-pushover');
+    notifier = new Pushover(config.pushover);
+    break;
+
+    case 'twilio':
+    var Twilio = require('twilio');
+    var notifier = new Twilio(config.twilio.sid, config.twilio.authToken);
+    break;
+}
 
 var previousUrls = {};
 
+
+function send(subject, message) {
+    switch(config.notification_type) {
+        case 'pushover':
+        notifier.send(subject, message);
+        break;
+
+        case 'twilio':
+        notifier.sendSms({
+            to: config.twilio.to,
+            from: config.twilio.from,
+            body: message
+        });
+        break;
+    }
+}
 
 loop();
 
@@ -26,7 +53,7 @@ function loop(){
 				// send out a bootup message
 				var bootupMsg = "Google I/O Watcher started, v" + packagejson.version;
 				console.log(bootupMsg);
-				push.send("Googie I/O Watcher", bootupMsg);
+				send("Googie I/O Watcher", bootupMsg);
 
 			} else {
 
@@ -34,7 +61,7 @@ function loop(){
 				_.each(items, function (item) {
 					if(!_.has(previousUrls, item.url)) {
 						console.log(item.title + ": " + item.url);
-						push.send(item.title, item.url);
+						send(item.title, item.url);
 						previousUrls[item.url] = true;
 					}
 
