@@ -26,7 +26,7 @@ Just run
 node app.js
 ```
 
-From the app/ folder.
+From the app/ folder. U can use [screen](https://help.ubuntu.com/community/Screen) to run in a detachable shell.
 
 #### Run it as a service ####
 Use [forever](https://github.com/nodejitsu/forever) to run the application in the background.
@@ -40,5 +40,7 @@ forever start app.js
 Run it on a machine that's always on. I recommend [Digital Ocean](http://www.digitalocean.com). They offer clould servers for only $5/month.
 
 ## Contributions ##
-Thanks to [Kristian Mide](https://github.com/fasmide) for fixing a logical error :-)
+Thanks to [Kristian Mide](https://github.com/fasmide) for [fixing](https://github.com/SamDecrock/node-google-io-watcher/commit/3ff7a7ae93c0e1fa3a82129d0326cd5a3c548ff9) a logical error :-)
+
+Thanks to [Julio Carlos Menendez](https://github.com/juliomenendez) for [adding](https://github.com/SamDecrock/node-google-io-watcher/pull/1) [Twilio](https://www.twilio.com/) support!
 
