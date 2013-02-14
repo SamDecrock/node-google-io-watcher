@@ -28,6 +28,14 @@ node app.js
 
 From the app/ folder.
 
+#### Run it as a service ####
+Use [forever](https://github.com/nodejitsu/forever) to run the application in the background.
+
+```
+[sudo] npm install forever -g
+forever start app.js
+```
+
 ## Where to run it ##
 Run it on a machine that's always on. I recommend [Digital Ocean](http://www.digitalocean.com). They offer clould servers for only $5/month.
 
