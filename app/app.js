@@ -13,7 +13,11 @@ switch(config.notification_type) {
 
     case 'twilio':
     var Twilio = require('twilio');
-    var notifier = new Twilio(config.twilio.sid, config.twilio.authToken);
+    notifier = new Twilio(config.twilio.sid, config.twilio.authToken);
+
+    case 'pushbullet':
+    var PushBullet = require('node-pushbullet');
+    notifier = new PushBullet(config.pushbullet.email, config.pushbullet.password);
     break;
 }
 
@@ -32,11 +36,19 @@ function send(subject, message) {
             from: config.twilio.from,
             body: message
         });
+
+        case 'pushbullet':
+        notifier.send('note', config.pushbullet.device, subject, message);
         break;
     }
 }
 
-loop();
+if(config.notification_type == 'pushbullet') {
+    notifier.on('ready', function() {
+      loop();
+    });
+} else
+    loop();
 
 function loop(){
 	getLatestPost(function (err, items) {
