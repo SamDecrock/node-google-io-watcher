@@ -14,4 +14,10 @@ exports.twilio = {
     to: '+18888238895' // Your phone number
 }
 
-exports.notification_type = 'pushover' // Either 'twilio' or 'pushover'
+exports.pushbullet = {
+    email: 'your-email@domain.com',
+    password: 'your-password',
+    device: 'XXXX'
+}
+
+exports.notification_type = 'pushover' // Either 'twilio' or 'pushover' or 'pushbullet'
