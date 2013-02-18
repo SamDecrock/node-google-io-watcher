@@ -1,6 +1,6 @@
 {
   "name": "node-google-io-watcher",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "scripts": {
     "start": "node app"
   },
@@ -8,6 +8,7 @@
     "httpreq": "*",
     "underscore": "~1.4.4",
     "node-pushover": "*",
-    "twilio": "*"
+    "twilio": "*",
+    "node-pushbullet": "~0.8.1"
   }
 }
